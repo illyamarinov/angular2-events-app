@@ -22,7 +22,7 @@ import { AppComponent } from './app.component';
     CoreModule,
     HomeModule,
     ProfileModule,
-    EventModule
+    EventModule,
    // NotFoundModule
   ],
   providers: [],
