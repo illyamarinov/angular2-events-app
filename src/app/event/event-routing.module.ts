@@ -1,7 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { EventComponent } from '@app/event/event.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: EventComponent,
+    data: { name: 'Ilya' },
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '0'
+      },
+      {
+        path: ':eventId',
+        component: EventComponent
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
