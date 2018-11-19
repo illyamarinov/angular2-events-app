@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
@@ -26,6 +27,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HomeModule,
     ProfileModule,
     EventModule,
+    HttpModule
    // NotFoundModule
   ],
   providers: [],

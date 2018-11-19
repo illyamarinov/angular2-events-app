@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { EventService } from '@app-core/services/event/event.service';
 
 @Component({
   selector: 'app-event',
@@ -7,17 +9,28 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
+  id: number;
+  event;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private eventService: EventService
+  ) { }
 
   ngOnInit() {
-    this.route.children[0].params
-      .subscribe((params: Params) => {
-        console.log(params);
-      });
 
-      this.route.data
-        .subscribe(data => console.log(data));
+    this.id = +this.route.children[0].snapshot.params['eventId'];
+
+    // this.eventService.getEvents();
+    this.eventService.getEvent(this.id)
+      .subscribe((value) => {
+        if (value !== undefined) {
+          this.event = value;
+        } else {
+          this.router.navigateByUrl('/not-found');
+        }
+      });
   }
 
 }

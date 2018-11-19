@@ -1,9 +1,28 @@
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
+  "events": [
+    {
+      "id": "1",
+      "title": "Event 1",
+      "creatorName": "User 1",
+      "listOfParticipants": "5",
+      "description": "Description 1",
+      "expireTime": "24"
+    },
+    {
+      "id": "2",
+      "title": "Event 2",
+      "creatorName": "User 2",
+      "listOfParticipants": "5",
+      "description": "Description 2",
+      "expireTime": "24"
+    },
+    {
+      "id": "3",
+      "title": "Event 3",
+      "creatorName": "User 3",
+      "listOfParticipants": "5",
+      "description": "Description 3",
+      "expireTime": "24"
+    }
+  ]
 }

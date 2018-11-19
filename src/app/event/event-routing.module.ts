@@ -7,12 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: EventComponent,
-    data: { name: 'Ilya' },
     children: [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '0'
+        redirectTo: '1'
       },
       {
         path: ':eventId',

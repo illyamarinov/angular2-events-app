@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { EventRoutingModule } from './event-routing.module';
 import { EventComponent } from './event.component';
@@ -8,7 +9,8 @@ import { EventComponent } from './event.component';
   declarations: [EventComponent],
   imports: [
     CommonModule,
-    EventRoutingModule
+    EventRoutingModule,
+    RouterModule,
   ]
 })
 export class EventModule { }
