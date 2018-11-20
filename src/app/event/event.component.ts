@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { EventService } from '@app-core/services/event/event.service';
+import { SnackBarService } from '@app-core/services/snackBar/snackBar.service';
 
 @Component({
   selector: 'app-event',
@@ -10,12 +11,13 @@ import { EventService } from '@app-core/services/event/event.service';
 })
 export class EventComponent implements OnInit {
   id: number;
-  event;
+  event = {};
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private eventService: EventService
+    private eventService: EventService,
+    private snackBarService: SnackBarService
   ) { }
 
   ngOnInit() {
@@ -23,14 +25,18 @@ export class EventComponent implements OnInit {
     this.id = +this.route.children[0].snapshot.params['eventId'];
 
     // this.eventService.getEvents();
-    this.eventService.getEvent(this.id)
-      .subscribe((value) => {
-        if (value !== undefined) {
-          this.event = value;
-        } else {
-          this.router.navigateByUrl('/not-found');
+    this.eventService.getEventById(this.id)
+      .subscribe(
+        (value) => {
+          if (value !== undefined) {
+            this.event = value;
+          }
+        },
+        () => {
+          this.router.navigateByUrl('/');
+          this.snackBarService.show();
         }
-      });
+      );
   }
 
 }
