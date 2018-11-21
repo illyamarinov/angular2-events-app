@@ -1,0 +1,21 @@
+.comments {
+
+  &__wrapper {
+    margin: 20px;
+  }
+
+  &__title {
+
+  }
+
+  &__content {
+
+    &_title {
+      margin-bottom: 10px;
+    }
+
+    &_paragraph {
+      margin-top: 10px;
+    }
+  }
+}

@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SnackBarService {
   constructor(private snackBar: MatSnackBar) {}
 
-  show() {
-    this.snackBar.open('Event doesn\'t exist', 'Close', {
+  show(message: string = 'Event doesn\'t exist', action: string = 'Close') {
+    this.snackBar.open(message, action, {
       duration: 3500,
     });
   }

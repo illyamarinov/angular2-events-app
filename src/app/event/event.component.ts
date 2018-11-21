@@ -3,15 +3,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { EventService } from '@app-core/services/event/event.service';
 import { SnackBarService } from '@app-core/services/snackBar/snackBar.service';
+import { Event } from '@app-core/models/event.model';
+
+const mockComments = [];
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit {
   id: number;
-  event = {};
+  event: Event = <Event>{};
+  // coments: Comment[] = mockComments;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,13 +28,11 @@ export class EventComponent implements OnInit {
 
     this.id = +this.route.children[0].snapshot.params['eventId'];
 
-    // this.eventService.getEvents();
     this.eventService.getEventById(this.id)
       .subscribe(
-        (value) => {
-          if (value !== undefined) {
-            this.event = value;
-          }
+        (value: Event) => {
+          this.event = value;
+          console.log(this.event);
         },
         () => {
           this.router.navigateByUrl('/');

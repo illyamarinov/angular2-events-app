@@ -1,4 +1,21 @@
-<p>
-  event works!
-</p>
-<pre>{{event|json}}</pre>
+<div class="event__wrapper">
+  <div class="event__description">
+    <app-event-description
+      [title]="event.title"
+      [description]="event.description"
+      [imgUrl]="event.imgUrl"
+      [creatorName]="event.creatorName"
+    ></app-event-description>
+  </div>
+  <div class="event__info">
+    <app-event-info></app-event-info>
+  </div>
+  <div class="event__comments">
+    <app-event-comments></app-event-comments>
+  </div>
+  <div class="event__participants">
+    <app-event-participants
+      [listOfParticipants]="event.listOfParticipants"
+    ></app-event-participants>
+  </div>
+</div>

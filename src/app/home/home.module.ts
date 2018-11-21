@@ -8,7 +8,10 @@ import { HomeComponent } from '@app/home/home.component';
 import { EventCardComponent } from './event-card/event-card.component';
 
 @NgModule({
-  declarations: [HomeComponent, EventCardComponent],
+  declarations: [
+    HomeComponent,
+    EventCardComponent
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
