@@ -5,9 +5,13 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@app-shared/material.module';
 import { HomeRoutingModule } from '@app/home/home-routing.module';
 import { HomeComponent } from '@app/home/home.component';
+import { EventCardComponent } from './event-card/event-card.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [
+    HomeComponent,
+    EventCardComponent
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,

@@ -1,4 +1,2 @@
-export const CONSTANTS = {
-  API_URL: 'http://localhost:3000/',
-  PATH: '',
-};
+export const API_URL = 'http://localhost:3000';
+export const PATH = '';

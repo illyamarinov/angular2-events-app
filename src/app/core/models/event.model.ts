@@ -5,4 +5,5 @@ export class Event {
   listOfParticipants: number;
   description: string;
   expireTime: number;
+  imgUrl?: string;
 }
