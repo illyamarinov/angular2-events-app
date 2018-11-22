@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
@@ -12,6 +15,8 @@ import { EventModule } from './event/event.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UserService } from './core/services/user.service';
+import { CommentService } from './core/services/comment.service';
 
 @NgModule({
   declarations: [
@@ -27,10 +32,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HomeModule,
     ProfileModule,
     EventModule,
-    HttpModule
-   // NotFoundModule
+    HttpModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    CommentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

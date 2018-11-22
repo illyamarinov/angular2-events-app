@@ -6,11 +6,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./event-participants.component.scss']
 })
 export class EventParticipantsComponent implements OnInit {
-  @Input() listOfParticipants: string;
+  @Input() participants: string[];
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.participants);
   }
 
 }
