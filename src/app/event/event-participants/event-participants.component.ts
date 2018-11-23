@@ -11,7 +11,7 @@ export class EventParticipantsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.participants);
+
   }
 
 }
