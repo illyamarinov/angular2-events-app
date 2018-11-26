@@ -1,9 +1,20 @@
+import { User } from './user.model';
+
 export class Event {
-  id: string;
+  id?: string;
   title: string;
-  creatorName: string;
-  listOfParticipants: number;
+  owner_id: string;
+  owner?: {
+    name: string;
+  };
+  participant_ids?: string[];
+  participants?: User[];
   description: string;
-  expireTime: number;
-  imgUrl?: string;
+  info: {
+    date: string;
+    time: string;
+    location: string;
+  };
+  img_url?: string;
+  comments?: any[];
 }

@@ -9,25 +9,19 @@
       <h3 mat-subheader>Main info</h3>
       <mat-list-item>
         <mat-icon mat-list-icon>event</mat-icon>
-        <h4 mat-line>Date: ....</h4>
+        <h4 mat-line>Date: <span style="color:blue">{{info.date | date}}</span></h4>
         <p mat-line>Lorem ipsum dolor sit amet.</p>
       </mat-list-item>
       <mat-list-item>
         <mat-icon mat-list-icon>place</mat-icon>
-        <h4 mat-line>Place: ....</h4>
+        <h4 mat-line>Place: <span style="color:blue">{{info.place}}</span></h4>
         <p mat-line>Lorem ipsum dolor sit amet.</p>
       </mat-list-item>
       <mat-list-item>
         <mat-icon mat-list-icon>schedule</mat-icon>
-        <h4 mat-line>Time: ....</h4>
+        <h4 mat-line>Time: <span style="color:blue">{{info.time}}</span></h4>
         <p mat-line>Lorem ipsum dolor sit amet.</p>
-      </mat-list-item>
-      <h3 mat-subheader>Additional info</h3>
-      <mat-list-item>
-        <mat-icon mat-list-icon>list</mat-icon>
-        <h4 mat-line>Other: ....</h4>
-        <p mat-line>Lorem ipsum dolor sit amet.</p>
-      </mat-list-item>
+      </mat-list-item>      
     </mat-list>
   </mat-card-content>
 </mat-card>

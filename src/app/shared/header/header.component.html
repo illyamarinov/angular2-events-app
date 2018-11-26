@@ -1,11 +1,19 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
+  <mat-toolbar-row class="toolbar__button__row">
     <button
-      mat-raised-button
+      mat-icon-button
       color="basic"
+      aria-label="Home button"
       routerLink=""
       >
-      Home
+      <mat-icon>home</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="basic"
+      routerLink="/event/new"
+      >
+      <mat-icon>add_box</mat-icon>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
