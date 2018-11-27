@@ -38,8 +38,6 @@ export class EventComponent implements OnInit {
           this.snackBarService.show();
         }
       );
-
-
   }
 
 }

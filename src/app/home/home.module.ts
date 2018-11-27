@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from '@app-shared/material.module';
 import { HomeRoutingModule } from '@app/home/home-routing.module';
@@ -15,7 +14,6 @@ import { EventCardComponent } from './event-card/event-card.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    RouterModule,
     MaterialModule
   ]
 })

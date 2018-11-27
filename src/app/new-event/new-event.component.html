@@ -1,3 +1,119 @@
-<p>
-  new-event works!
-</p>
+<mat-card class="new-event__wrapper">
+  <mat-card-header>
+    <mat-card-title>
+      <h1 class="new-event__title">Create New Event</h1>
+    </mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="new-event__content">
+    <form class="new-event__form" [formGroup]="newEventForm" (ngSubmit)="submit()">
+      <mat-form-field appearance="standard" class="new-event__title_input">
+        <mat-label>Event Title</mat-label>
+        <input
+          matInput
+          placeholder="enter a title"
+          formControlName="title"
+        />
+        <mat-error *ngIf="newEventForm.controls['title'].hasError('123-title')">Custom error.</mat-error>
+        <mat-error *ngIf="newEventForm.controls['title'].hasError('required')">Custom error required.</mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+
+      <div class="new-event__info" formGroupName="info">
+        <mat-card-title>
+          <h5 class="new-event__info_title">Event info</h5>
+        </mat-card-title>
+
+        <mat-list class="new-event__info_list">
+          <mat-list-item class="new-event__info_item">
+            <mat-icon mat-list-icon class="new-event__info_icons">event</mat-icon>
+            <mat-form-field class="new-event__info_input">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                placeholder="Choose a date"
+                formControlName="date"
+              />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </mat-list-item>
+
+          <mat-list-item class="new-event__info_item">
+            <mat-icon mat-list-icon class="new-event__info_icons">place</mat-icon>
+            <mat-form-field class="new-event__info_input">
+              <mat-select
+                placeholder="City"
+                formControlName="city"
+              >
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="newEventForm.controls['info'].controls['city'].hasError('required')">Required.</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+
+          <mat-list-item class="new-event__info_item">
+            <mat-icon mat-list-icon class="new-event__info_icons">schedule</mat-icon>
+            <mat-form-field class="new-event__info_input">
+              <input
+                matInput
+                type="time"
+                placeholder="Set a time"
+                formControlName="time"
+              />
+            </mat-form-field>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <mat-divider></mat-divider>
+
+      <mat-form-field appearance="outline" class="new-event__description_input">
+        <mat-label>Event description</mat-label>
+        <textarea
+          matInput
+          placeholder="enter a text"
+          formControlName="desciption"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="new-event__participants_chips">
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let participant of participants"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(participant)">
+            {{participant}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Event participants..."
+            #participantInput
+            [formControl]="participantCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+            formControlName="participants_ids"
+          />
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <ng-container *ngFor="let user of allUsers">
+            <mat-option *ngIf="!participants.includes(user.name)"  [value]="user">
+              {{user.name}}
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button [disabled]="newEventForm.invalid" class="new-event__submit" mat-raised-button (click)="submit()">Submit</button>
+  </mat-card-actions>
+</mat-card>
+
+<pre>{{this.newEventForm.value | json}}</pre>
