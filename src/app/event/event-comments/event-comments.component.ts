@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-event-comments',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./event-comments.component.scss']
 })
 export class EventCommentsComponent implements OnInit {
+  @Input() comments: string[];
 
   constructor() { }
 
