@@ -18,3 +18,9 @@ export class Event {
   img_url?: string;
   comments?: any[];
 }
+
+export const defaultEvent = {
+  title: '',
+  description: '',
+  participant_ids: []
+};

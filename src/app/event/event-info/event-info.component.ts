@@ -11,11 +11,5 @@ export class EventInfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.calcTime();
-  }
-
-  calcTime() {
-    const time = new Date(this.info.time);
-    this.info.time = `${time.getHours()}:${time.getMinutes()}`;
   }
 }

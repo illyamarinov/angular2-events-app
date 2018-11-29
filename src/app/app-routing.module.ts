@@ -9,8 +9,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => HomeModule },
-  { path: 'event', loadChildren: () => EventModule },
   { path: 'event/new', loadChildren: () => NewEventModule },
+  { path: 'event', loadChildren: () => EventModule },
   { path: 'profile', loadChildren: () => ProfileModule },
   { path: '**', component: NotFoundComponent },
 ];

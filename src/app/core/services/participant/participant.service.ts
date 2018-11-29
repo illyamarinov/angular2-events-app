@@ -15,8 +15,8 @@ export class ParticipantService extends APIHelper {
   }
 
 
-  getParticipants(list: string[]): Observable<User[]> {
-    const usersRefs: Observable<User>[] = list.map(
+  getParticipants(participantsIds: string[] = []): Observable<User[]> {
+    const usersRefs: Observable<User>[] = participantsIds.map(
       (userId: string) => this.getObject<User>(`users/${userId}`)
     );
     return combineLatest(usersRefs);
