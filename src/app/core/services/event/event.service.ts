@@ -44,6 +44,8 @@ export class EventService extends APIHelper {
       );
   }
 
+
+
   createEvent(event: Event) {
     const getUserId = this.authService.getUserId();
 

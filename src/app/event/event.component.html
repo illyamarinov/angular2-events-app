@@ -1,25 +1,39 @@
 <div class="event__wrapper" *ngIf="event">
-  <div class="event__description">
-    <app-event-description
-      [title]="event.title"
-      [description]="event.description"
-      [imgUrl]="event.img_url"
-      [creatorName]="event.owner.name"
-    ></app-event-description>
-  </div>
-  <div class="event__info">
-    <app-event-info
-      [info]="event.info"
-    ></app-event-info>
-  </div>
-  <div class="event__comments">
-    <app-event-comments
-      [comments]="event.comments"
-    ></app-event-comments>
-  </div>
-  <div class="event__participants">
-    <app-event-participants
-      [participantsId]="event.participant_ids"
-    ></app-event-participants>
-  </div>
+  <main>
+
+    <section>
+      <div class="event__description">
+        <app-event-description
+        [title]="event.title"
+        [description]="event.description"
+        [imgUrl]="event.img_url"
+        [creatorName]="event.owner.name"
+        ></app-event-description>
+      </div>
+    </section>
+
+    <aside>
+      <div class="event__info">
+        <app-event-info
+          [info]="event.info"
+        ></app-event-info>
+      </div>
+      <div class="event__participants">
+        <app-event-participants
+        [participantsId]="event.participant_ids"
+        ></app-event-participants>
+      </div>
+    </aside>
+
+    <footer>
+      <div class="event__comments">
+        <app-event-comments
+          [comments]="event.comments"
+        ></app-event-comments>
+      </div>
+    </footer>
+    
+  </main>
+
+
 </div>

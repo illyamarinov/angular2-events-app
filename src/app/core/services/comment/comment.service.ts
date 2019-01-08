@@ -27,7 +27,6 @@ export class CommentService extends APIHelper {
           return comments.length ? comments[index] : {};
         }),
         mergeMap((comment: Comment) => {
-          console.log(comment);
           const userRef = !!comment
             ? this.userService.getUserById(comment.owner_id)
             : of(<User>{});

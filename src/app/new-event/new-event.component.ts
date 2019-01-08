@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
 
 import { User } from '@app-core/models/user.model';
+import { Event } from '@app-core/models/event.model';
 import { EventService } from '@app-core/services/event/event.service';
 
 const epmtyValidator = (control: FormControl): ValidationErrors | null => {
@@ -17,19 +19,22 @@ const epmtyValidator = (control: FormControl): ValidationErrors | null => {
   templateUrl: './new-event.component.html',
   styleUrls: ['./new-event.component.scss']
 })
-export class NewEventComponent implements OnInit {
+export class NewEventComponent implements OnInit, OnDestroy {
   // form
   newEventForm: FormGroup;
+  destroyFlag = true;
 
   // info
   cities: string[] = ['Minsk', 'Grodno', 'Gomel', 'Mogilev', 'Brest', 'Vitebsk'];
 
   // participants
   separatorKeysCodes: number[] = [ENTER, COMMA];
+
   newEventOwner: User = {
     name: 'Chack 1',
     id: '-LRuxC_3Bxj6keYnY4BT'
   };
+
   allUsers: User[] = [{
     name: 'Chack 1',
     id: '-LRuxC_3Bxj6keYnY4BT'
@@ -37,6 +42,18 @@ export class NewEventComponent implements OnInit {
     name: 'Chack 2',
     id: '-LRuxC_6lY-LFWqgVjfK'
   }];
+
+  tempEvent: Event = {
+    title: 'temp title',
+    description: 'temp description',
+    info: {
+      date: 'temp date',
+      time: 'temp time',
+      location: 'temp location'
+    },
+    owner_id: this.newEventOwner.id
+  };
+
   participants: string[] = [];
   visible = true;
   selectable = true;
@@ -46,7 +63,10 @@ export class NewEventComponent implements OnInit {
   @ViewChild('participantInput') participantInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(private eventService: EventService) {}
+  constructor (
+    private eventService: EventService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.newEventForm = new FormGroup({
@@ -63,6 +83,13 @@ export class NewEventComponent implements OnInit {
       description: new FormControl('', Validators.required),
       participant_ids: new FormControl([this.newEventOwner.id])
     });
+
+    // this.eventService.createEvent(this.tempEvent);
+
+  }
+  // TODO: !!!
+  ngOnDestroy() {
+    // this.
   }
 
   add(event: MatChipInputEvent): void {
@@ -107,16 +134,21 @@ export class NewEventComponent implements OnInit {
     this.participantInput.nativeElement.value = '';
   }
 
-  submit() {
-    // let newEvent = this.newEventForm.value;
-    // newEvent = {
-    //   ...newEvent,
-    //   owner_id: this.newEventOwner.id,
-    // };
-    // newEvent.info.date += '';
-    console.log(this.newEventForm.value);
+  goToEvent(title) {
+    this.router.navigate([`/event/${title}`]);
+  }
 
-    this.eventService.createEvent(this.newEventForm.value);
+  submit() {
+    // this.eventService.createEvent(this.newEventForm.value);
+    this.eventService.getEvents()
+      .subscribe(
+        (events) => {
+          this.goToEvent(events.find((event) => {
+            return event.title === this.newEventForm.controls['title'].value;
+          }).id);
+        }
+      );
+    // this.goToEvent();
   }
 
 }

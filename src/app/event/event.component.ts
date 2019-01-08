@@ -27,13 +27,10 @@ export class EventComponent implements OnInit {
 
     this.id = this.route.children[0].snapshot.params['eventId'];
 
-    console.log(this.id);
-
     this.eventService.getEventById(this.id)
       .subscribe(
         (event: Event) => {
           this.event = event;
-          console.log(this.event);
         },
         () => {
           this.router.navigateByUrl('/');

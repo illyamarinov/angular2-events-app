@@ -1,31 +1,29 @@
 .event {
 
   &__wrapper {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 1fr 1fr;
-    // grid-gap: 5px;
-    grid-template-areas:
-      ". d d d d d d . i i i ."
-      ". d d d d d d . i i i ."
-      ". d d d d d d . p p p ."
-      ". d d d d d d . p p p ."
-      ". c c c c c c . . . . .";
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "s s s a a"
+    "f f f a a";
+
+  & section {
+    grid-area: s;
   }
 
-  &__description {
-    grid-area: d;
+  & aside {
+    grid-area: a;
   }
 
-  &__info {
-    grid-area: i;
-  }
-
-  &__comments {
-    grid-area: c;
-  }
-
-  &__participants {
-    grid-area: p;
+  & footer {
+    grid-area: f;
   }
 }
