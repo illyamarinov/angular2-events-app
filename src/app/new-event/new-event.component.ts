@@ -7,6 +7,9 @@ import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from
 import { User } from '@app-core/models/user.model';
 import { Event } from '@app-core/models/event.model';
 import { EventService } from '@app-core/services/event/event.service';
+import { Subscription, ReplaySubject, Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 const epmtyValidator = (control: FormControl): ValidationErrors | null => {
   return control.value.trim() === ''
@@ -14,12 +17,26 @@ const epmtyValidator = (control: FormControl): ValidationErrors | null => {
     : null;
 };
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-new-event',
   templateUrl: './new-event.component.html',
   styleUrls: ['./new-event.component.scss']
 })
 export class NewEventComponent implements OnInit, OnDestroy {
+  //
+  destroy: Observable<any> = new ReplaySubject<any>(1);
+
+  // array with all subscribes
+  subscriptions: Subscription = new Subscription();
+
+  // array with all events of
+  events: Event[];
+
+  // flag for checking if event was added -> go to this event page
+  isEventUpdate = false;
+
+
   // form
   newEventForm: FormGroup;
   destroyFlag = true;
@@ -86,10 +103,33 @@ export class NewEventComponent implements OnInit, OnDestroy {
 
     // this.eventService.createEvent(this.tempEvent);
 
+    this.subscriptions.add(this.eventService.getEvents()
+      .subscribe(
+        (events) => {
+          this.events = events;
+          console.log(events);
+          if (this.isEventUpdate) {
+            this.goToEvent(this.events[this.events.length - 1].id);
+          }
+        }
+      )
+    );
+
+    // this.eventService.getEvents()
+    //   .pipe(takeUntil(this.destroy))
+    //   .subscribe(
+    //     (events) => {
+    //       this.events = events;
+    //       console.log(events);
+    //       if (this.isEventUpdate) {
+    //         this.goToEvent(this.events[this.events.length - 1].id);
+    //       }
+    //     }
+    //   );
   }
-  // TODO: !!!
+
   ngOnDestroy() {
-    // this.
+    // this.subscriptions.unsubscribe();
   }
 
   add(event: MatChipInputEvent): void {
@@ -139,16 +179,8 @@ export class NewEventComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    // this.eventService.createEvent(this.newEventForm.value);
-    this.eventService.getEvents()
-      .subscribe(
-        (events) => {
-          this.goToEvent(events.find((event) => {
-            return event.title === this.newEventForm.controls['title'].value;
-          }).id);
-        }
-      );
-    // this.goToEvent();
+    this.eventService.createEvent(this.newEventForm.value);
+    this.isEventUpdate = true;
+    console.log('success creating');
   }
-
 }
