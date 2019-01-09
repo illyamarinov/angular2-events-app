@@ -6,7 +6,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 import { Comment } from '@app-core/models/comment.model';
 import { APIHelper } from '@app-core/services/api-helper';
-import { UserService } from './user.service';
+import { UserService } from '@app-core/services/user/user.service';
+import { User } from '@app/core/models/user.model';
 
 @Injectable()
 export class CommentService extends APIHelper {
@@ -22,19 +23,19 @@ export class CommentService extends APIHelper {
   getComments(eventId: string): Observable<Comment[]> {
     return this.getList<Comment>(`comments/${eventId}`)
       .pipe(
-        map((comment, index) => {
-          return comment[index];
+        map((comments, index) => {
+          return comments.length ? comments[index] : {};
         }),
         mergeMap((comment: Comment) => {
-          return combineLatest(
-            of(comment),
-            this.userService.getUserById(comment.owner_id)
-          );
+          const userRef = !!comment
+            ? this.userService.getUserById(comment.owner_id)
+            : of(<User>{});
+          return combineLatest(of(comment), userRef);
         }),
         map(([comment, owner]) => {
           return [{
             ...comment,
-            owner_name: owner['name']
+            owner_name: owner.name
           }];
         })
       );

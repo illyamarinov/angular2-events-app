@@ -1,16 +1,26 @@
 import { User } from './user.model';
 
 export class Event {
-  id: string;
+  id?: string;
   title: string;
   owner_id: string;
-  owner: {
+  owner?: {
     name: string;
   };
-  participant_ids: string[];
+  participant_ids?: string[];
   participants?: User[];
   description: string;
-  expireTime: number;
+  info: {
+    date: string;
+    time: string;
+    location: string;
+  };
   img_url?: string;
   comments?: any[];
 }
+
+export const defaultEvent = {
+  title: '',
+  description: '',
+  participant_ids: []
+};

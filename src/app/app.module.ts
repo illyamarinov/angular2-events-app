@@ -12,11 +12,13 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { ProfileModule } from './profile/profile.module';
 import { EventModule } from './event/event.module';
+import { NewEventModule } from './new-event/new-event.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { UserService } from './core/services/user.service';
-import { CommentService } from './core/services/comment.service';
+import { UserService } from './core/services/user/user.service';
+import { CommentService } from './core/services/comment/comment.service';
+import { ParticipantService } from './core/services/participant/participant.service';
 
 @NgModule({
   declarations: [
@@ -33,12 +35,14 @@ import { CommentService } from './core/services/comment.service';
     ProfileModule,
     EventModule,
     HttpModule,
+    NewEventModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule
   ],
   providers: [
     UserService,
-    CommentService
+    CommentService,
+    ParticipantService
   ],
   bootstrap: [AppComponent]
 })

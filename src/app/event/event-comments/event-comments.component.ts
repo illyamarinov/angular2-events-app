@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, TrackByFunction } from '@angular/core';
+
+import { trackById } from '@app/shared/utils';
 
 @Component({
   selector: 'app-event-comments',
@@ -7,6 +9,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EventCommentsComponent implements OnInit {
   @Input() comments: string[];
+
+  trackById: TrackByFunction<any> = trackById;
 
   constructor() { }
 

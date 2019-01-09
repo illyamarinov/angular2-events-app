@@ -20,7 +20,7 @@ export class EventComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
   ) { }
 
   ngOnInit() {
@@ -29,9 +29,8 @@ export class EventComponent implements OnInit {
 
     this.eventService.getEventById(this.id)
       .subscribe(
-        (value: Event) => {
-          this.event = value;
-          console.log(this.event);
+        (event: Event) => {
+          this.event = event;
         },
         () => {
           this.router.navigateByUrl('/');

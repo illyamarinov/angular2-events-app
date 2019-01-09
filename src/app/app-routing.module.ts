@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeModule } from './home/home.module';
 import { EventModule } from './event/event.module';
+import { NewEventModule } from './new-event/new-event.module';
 import { ProfileModule } from './profile/profile.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => HomeModule },
+  { path: 'event/new', loadChildren: () => NewEventModule },
   { path: 'event', loadChildren: () => EventModule },
   { path: 'profile', loadChildren: () => ProfileModule },
   { path: '**', component: NotFoundComponent },

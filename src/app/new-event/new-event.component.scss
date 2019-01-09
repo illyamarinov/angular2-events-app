@@ -1,0 +1,60 @@
+.new-event {
+
+  &__wrapper {
+    margin: 50px auto;
+    max-width: 600px;
+  }
+
+  &__content {
+
+    .new-event__title_input {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__form {
+    min-width: 150px;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  &__title_input, &__description_input, &__info_input,
+  &__participants_chips {
+    width: 100%;
+  }
+
+  &__description_input {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  &__info {
+    margin: 15px 0;
+
+    &_list {
+      padding-top: 0;
+    }
+
+    &_item {
+      margin: 30px 0;
+    }
+
+    &_icons {
+      margin-right: 15px;
+    }
+
+    &_title {
+
+    }
+  }
+
+  &__submit {
+    width: 100%;
+  }
+}
+
+
+.new-event__avatar {
+  background-size: cover;
+  margin-right: 10px;
+}
